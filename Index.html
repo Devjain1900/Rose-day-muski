@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Rose Day Muskan 🌹</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(to top right, #ffdde1, #ee9ca7);
+        font-family: 'Comic Sans MS', cursive;
+        text-align: center;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        z-index: 10;
+        display: none;
+    }
+
+    h1 {
+        color: #ff3e6c;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 20px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        margin: 12px;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background: #ff3e6c;
+        color: white;
+    }
+
+    #noBtn {
+        background: #aaa;
+        color: white;
+    }
+
+    /* Tap to start screen */
+    #startScreen {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(to top right, #ffdde1, #ee9ca7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 30;
+    }
+
+    #startScreen h2 {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        color: #ff3e6c;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    /* Popup */
+    #popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 20;
+    }
+
+    .popup-content {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+
+    .popup-content img {
+        width: 200px;
+    }
+
+    /* Rose rain */
+    .rose {
+        position: absolute;
+        top: -40px;
+        font-size: 30px;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Tap to start -->
+<div id="startScreen" onclick="startLove()">
+    <h2>Tap to Start ❤️</h2>
+</div>
+
+<!-- Soothing romantic music -->
+<audio id="music" loop>
+    <source src="https://www.chosic.com/wp-content/uploads/2021/04/Only-Love.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="mainContent">
+    <h1>🌹 Muskan, Will You Accept My Rose? 🌹</h1>
+    <button id="yesBtn" onclick="sayYes()">YES</button>
+    <button id="noBtn" onclick="sayNo()">NO</button>
+</div>
+
+<div id="popup">
+    <div class="popup-content">
+        <img src="https://i.imgur.com/QM9ZQZC.png" alt="Teddy with Rose">
+        <h2>Happy Rose Day Muskan ❤️</h2>
+        <p>This teddy brings you a rose & all my love 💕</p>
+    </div>
+</div>
+
+<script>
+    let noCount = 0;
+    let yesSize = 20;
+
+    function startLove() {
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.getElementById("music").play();
+        startRoseRain();
+    }
+
+    function sayNo() {
+        noCount++;
+        yesSize += 8;
+        document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+
+        if (noCount >= 8) {
+            document.getElementById("noBtn").style.display = "none";
+        }
+    }
+
+    function sayYes() {
+        document.getElementById("popup").style.display = "flex";
+    }
+
+    function startRoseRain() {
+        setInterval(() => {
+            const rose = document.createElement("div");
+            rose.className = "rose";
+            rose.innerHTML = "🌹";
+            rose.style.left = Math.random() * 100 + "vw";
+            rose.style.animationDuration = Math.random() * 3 + 4 + "s";
+            document.body.appendChild(rose);
+
+            setTimeout(() => rose.remove(), 7000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
